@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/lib/server/generated/prisma"
+  output   = "../node_modules/@prisma-app/client"
 }
 
 datasource db {
@@ -10,9 +10,11 @@ datasource db {
 }
 
 model User {
-  id              Int    @id @default(autoincrement())
-  username        String
-  profile_picture String
+  id                     String @id
+  username               String
+  avatar                 String
+  discord_refresh_token  String
+  jwt_refresh_token_hash String
 }
 
 model Raid {
