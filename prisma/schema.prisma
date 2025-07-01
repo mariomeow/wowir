@@ -9,14 +9,18 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id                     String @id
-  username               String
-  avatar                 String
-  discord_refresh_token  String
-  jwt_refresh_token_hash String
+model Session {
+  id                     String   @id @default(cuid())
+  User                   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId                 String
+  jwt_refresh_token_hash String   @unique
+  expiresAt              DateTime
 }
 
-model Raid {
-  id String @id
+model User {
+  id                    String    @id
+  username              String
+  avatar                String?
+  discord_refresh_token String
+  sessions              Session[]
 }
