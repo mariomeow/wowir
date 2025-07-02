@@ -29,6 +29,7 @@
 	},
 	"dependencies": {
 		"@prisma/client": "^6.10.1",
+		"@sveltejs/adapter-vercel": "^5.7.2",
 		"@types/jsonwebtoken": "^9.0.10",
 		"arctic": "^3.7.0",
 		"date-fns": "^4.1.0",
