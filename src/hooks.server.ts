@@ -29,9 +29,7 @@ export const handle: Handle = async ({ event, resolve }) => {
             }
         }
     } else if (jwt_refresh_token) {
-        console.log("FOUND JWT TOKEN")
         try {
-            console.log("RUNNING AUTH SETUP")
             await authSetup(event, jwt_refresh_token, discord_access_token)
         } catch (error) {
             clearCookies(event)

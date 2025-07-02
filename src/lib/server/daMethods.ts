@@ -188,21 +188,6 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
         }
     })
 
-    const hash = crypto.createHash("sha256").update(jwt_refresh_token).digest("base64")
-
-    const proba = await prisma.session.findMany({
-        where: {
-            expiresAt: {
-                gt: new Date()
-            }
-        },
-        include: {
-            User: true
-        }
-    })
-
-    console.log(proba, hash)
-
     if (session) {
         const new_jwt_refresh_token: string = crypto.randomBytes(32).toString("hex")
         const new_jwt_refresh_token_hash: string = crypto.createHash("sha256").update(new_jwt_refresh_token).digest("base64")
@@ -254,8 +239,6 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
             username: session.User.username,
             avatar: session.User.avatar as string
         }
-
-        console.log("DONE")
 
         if (!discord_token) {
             await refreshDiscordToken(event, session.User.id)
