@@ -10,7 +10,13 @@ declare global {
 				avatar: string
 			} | null
 		}
-		// interface PageData {}
+		interface PageData {
+			user: {
+				id: string,
+				username: string,
+				avatar: string
+			} | null
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}
