@@ -24,6 +24,7 @@
     --background: black;
     --nav: #0A0A0A;
     --border: #2D2D2D;
+    --border-hover: #5a5a5a;
     --white: #eeeeee;
     --hover: #1F1F1F;
     --gray: gray;
@@ -110,20 +111,30 @@ nav .logo {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 15px;
+    gap: 10px;
 }
 
-.nav-top-right a {
-    font-size: var(--font-normal);
-    color: white;
-    border: 1px solid var(--border);
+.nav-top-right .a__icon {
+    padding: 0px;
+    width: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+.nav-top-right>a {
     padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--font-normal);
+    color: var(--white);
+    border: 1px solid var(--border);
     text-decoration: none;
     border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-.nav-top-right a:hover {
+.nav-top-right>a:hover {
     background-color: var(--hover);
 }
 
@@ -140,4 +151,120 @@ nav .logo {
     aspect-ratio: 1/1;
     border-radius: 50%;
     pointer-events: none;
+}
+
+.authButton {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.overview {
+    margin: 0px auto;
+    width: 70%;
+}
+
+.overview__split {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 20px;
+}
+
+.overview__left {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.overview__left__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 15px;
+}
+
+.overview__h1 {
+    color: var(--white);
+    font-size: var(--font-normal);
+    font-weight: normal;
+}
+
+.overview__box {
+    border-radius: 5px;
+    padding: 10px;
+    background-color: var(--nav);
+    border: 1px solid var(--border);
+    transition: border 0.3s;
+}
+
+.overview__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 15px;
+}
+
+.overview__right__boxes {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.overview__right__boxes button {
+    cursor: pointer;
+}
+
+.overview__right__boxes button:hover {
+    border: 1px solid var(--border-hover);
+}
+
+.nav_button_wrapper {
+    position: relative;
+}
+
+.dropdown {
+    color: var(--white);
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    background-color: var(--nav);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    min-width: 230px;
+}
+
+.dropdown p {
+    font-size: var(--font-normal);
+}
+
+.dropdown__top {
+    padding: 15px 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.dropdown__actions {
+    padding: 10px 7px;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-bottom: 1px solid var(--border);
+}
+
+.dropdown__actions a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 7px;
+    font-size: var(--font-normal);
+    text-decoration: none;
+    color: var(--gray);
+    transition: 0.3s;
+    border-radius: 7px;
+}
+
+.dropdown__actions a:hover {
+    color: var(--white);
+    background-color: var(--hover);
 }
