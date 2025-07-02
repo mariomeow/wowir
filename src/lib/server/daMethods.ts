@@ -188,7 +188,13 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
         }
     })
 
-    const proba = await prisma.session.findMany()
+    const proba = await prisma.session.findMany({
+        where: {
+            expiresAt: {
+                gt: new Date()
+            }
+        }
+    })
 
     console.log(proba)
 
