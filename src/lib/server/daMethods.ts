@@ -188,15 +188,20 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
         }
     })
 
+    const hash = crypto.createHash("sha256").update(jwt_refresh_token).digest("base64")
+
     const proba = await prisma.session.findMany({
         where: {
             expiresAt: {
                 gt: new Date()
             }
+        },
+        include: {
+            User: true
         }
     })
 
-    console.log(proba)
+    console.log(proba, hash)
 
     if (session) {
         const new_jwt_refresh_token: string = crypto.randomBytes(32).toString("hex")
