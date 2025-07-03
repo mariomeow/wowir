@@ -252,7 +252,9 @@ nav .logo {
     border-bottom: 1px solid var(--border);
 }
 
-.dropdown__actions a {
+.dropdown__actions a,
+.dropdown__actions button {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -262,9 +264,12 @@ nav .logo {
     color: var(--gray);
     transition: 0.3s;
     border-radius: 7px;
+    background-color: transparent;
+    box-sizing: border-box;
 }
 
-.dropdown__actions a:hover {
+.dropdown__actions a:hover,
+.dropdown__actions button:hover {
     color: var(--white);
     background-color: var(--hover);
 }

@@ -9,7 +9,7 @@ export async function GET({ cookies, url }) {
     const storedState: string | undefined = cookies.get("state")
 
     if (!urlCode || !storedState || urlState != storedState) {
-        return redirect(302, "/")
+        redirect(307, "/")
     }
 
     try {
@@ -25,5 +25,5 @@ export async function GET({ cookies, url }) {
         }
     }
 
-    return redirect(302, "/")
+    redirect(307, "/")
 } 

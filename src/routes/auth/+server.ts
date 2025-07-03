@@ -14,5 +14,5 @@ export async function GET({ cookies }) {
         maxAge: 60 * 10
     })
 
-    return redirect(302, url)
+    redirect(307, url)
 } 
