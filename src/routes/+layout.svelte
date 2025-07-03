@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Nav from "$lib/components/Nav.svelte"
 	import "$lib/style.css"
+	import Nav from "$lib/components/Nav.svelte"
 
 	let { children } = $props()
 </script>
