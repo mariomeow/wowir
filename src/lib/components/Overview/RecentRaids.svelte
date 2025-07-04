@@ -15,7 +15,7 @@
 			</div>
 		{:then raidData}
 			<div class="overview__stats">
-				{#if raidData.lastFive.length == 0}
+				{#if raidData.lastFive?.length == 0}
 					<p class="overview__placeholder">Your five recent raids will appear here.</p>
 				{:else}
 					{#each raidData.lastFive as { instanceId, createdAt, id }}
