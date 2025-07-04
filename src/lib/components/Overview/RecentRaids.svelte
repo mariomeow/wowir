@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { raids } from "$lib/data/raids"
 	import { toDate } from "$lib/utils"
-	import LineMdLoadingTwotoneLoop from "~icons/line-md/loading-twotone-loop"
+	import LineMdLoadingLoop from "~icons/line-md/loading-loop"
 
 	let { data } = $props()
 </script>
@@ -11,7 +11,7 @@
 	<div class="overview__box">
 		{#await data}
 			<div class="overview__loader">
-				<LineMdLoadingTwotoneLoop />
+				<LineMdLoadingLoop />
 			</div>
 		{:then raidData}
 			<div class="overview__stats">
