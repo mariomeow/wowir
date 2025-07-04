@@ -15,7 +15,7 @@
 		{:then raidData}
 			<p>All-Time</p>
 			<div class="overview__stats">
-				{#if raidData.raidsMap?.size == 0}
+				{#if !raidData || raidData.raidsMap.size == 0}
 					<p class="overview__placeholder">Your raiding history will appear here.</p>
 				{:else}
 					{#each raidData.raidsMap as [id, count]}
