@@ -30,6 +30,7 @@
     --gray: gray;
     --font-big: 21px;
     --font-normal: 14px;
+    --font-small: 12px;
     font-family: "Geist";
     color: var(--white);
 }
@@ -38,13 +39,22 @@ body {
     background-color: var(--background);
 }
 
+main {
+    margin-top: 130px;
+}
+
 nav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
     padding: 20px 20px 5px 20px;
     background-color: var(--nav);
     border-bottom: 1px solid var(--border);
+    box-sizing: border-box;
 }
 
 nav .logo {
@@ -193,7 +203,7 @@ nav .logo {
 
 .overview__box {
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
     background-color: var(--nav);
     border: 1px solid var(--border);
     transition: border 0.3s;
@@ -271,5 +281,76 @@ nav .logo {
 .dropdown__actions a:hover,
 .dropdown__actions button:hover {
     color: var(--white);
+    background-color: var(--hover);
+}
+
+.overview__box>p {
+    color: var(--white);
+    font-size: var(--font-normal);
+    margin-bottom: 15px;
+}
+
+.overview__stats {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.overview__stats button {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background);
+    padding: 7px 14px 7px 7px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.overview__stats button:hover {
+    background-color: var(--hover);
+}
+
+.stats__d {
+    color: var(--white);
+    font-size: var(--font-normal);
+}
+
+.stats__n {
+    color: var(--gray);
+    font-size: var(--font-small);
+}
+
+.overview__loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overview__loader svg {
+    font-size: var(--font-big);
+}
+
+.overview__placeholder {
+    font-size: var(--font-small);
+    color: var(--gray);
+}
+
+.overview__stats a {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background);
+    padding: 7px 14px 7px 7px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    text-decoration: none;
+    font-size: var(--font-normal);
+    color: var(--white);
+    border-radius: 5px;
+}
+
+.overview__stats a:hover {
     background-color: var(--hover);
 }

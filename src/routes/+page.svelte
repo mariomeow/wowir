@@ -1,22 +1,15 @@
 <script lang="ts">
+	import AllRaids from "$lib/components/Overview/AllRaids.svelte"
+	import RecentRaids from "$lib/components/Overview/RecentRaids.svelte"
+
 	let { data } = $props()
 </script>
 
 <div class="overview">
 	<div class="overview__split">
 		<div class="overview__left">
-			<div class="overview__left__section">
-				<h1 class="overview__h1">My Stats</h1>
-				<div class="overview__box">
-					<p>xD</p>
-				</div>
-			</div>
-			<div class="overview__left__section">
-				<h1 class="overview__h1">Recent Raids</h1>
-				<div class="overview__box">
-					<p>xD</p>
-				</div>
-			</div>
+			<AllRaids data={data.raidData} />
+			<RecentRaids data={data.raidData} />
 		</div>
 		<div class="overview__right">
 			<h1 class="overview__h1">My Raids</h1>

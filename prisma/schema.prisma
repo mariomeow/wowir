@@ -17,9 +17,32 @@ model Session {
 }
 
 model User {
-  id                    String    @id
+  id                    String              @id
   username              String
   avatar                String?
   discord_refresh_token String
   sessions              Session[]
+  raids                 Raid[]
+  raidParticipations    RaidParticipation[]
+}
+
+model Raid {
+  id                 String              @id @default(uuid(7))
+  name               String
+  instanceId         Int
+  createdAt          DateTime            @default(now())
+  startsAt           DateTime            @default(now())
+  locked             Boolean             @default(false)
+  host               User                @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  hostId             String
+  raidParticipations RaidParticipation[]
+}
+
+model RaidParticipation {
+  id       Int      @id @default(autoincrement())
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId   String
+  raid     Raid     @relation(fields: [raidId], references: [id], onDelete: Cascade)
+  raidId   String
+  joinedAt DateTime @default(now())
 }

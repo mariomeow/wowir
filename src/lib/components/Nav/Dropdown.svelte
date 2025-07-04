@@ -4,7 +4,6 @@
 	import LucideLogIn from "~icons/lucide/log-in"
 	import LucideHome from "~icons/lucide/home"
 	import { onNavigate } from "$app/navigation"
-	import { enhance } from "$app/forms"
 
 	let { user, navState = $bindable() } = $props()
 
@@ -36,7 +35,7 @@
 	</div>
 	<div class="dropdown__actions">
 		<a href="/">Home Page <LucideHome /></a>
-		<form action="/logout" method="post" use:enhance>
+		<form action="/logout" method="post">
 			<button type="submit">Log Out <LucideLogIn /></button>
 		</form>
 	</div>

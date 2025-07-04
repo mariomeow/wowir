@@ -8,9 +8,9 @@ export async function POST(event) {
     const jwt_refresh_token: string | undefined = event.cookies.get("jwt_refresh_token")
 
     try {
-        if (discord_access_token) revokeToken(discord_access_token)
+        if (discord_access_token) await revokeToken(discord_access_token)
 
-        if (jwt_refresh_token) prisma.session.delete({
+        if (jwt_refresh_token) await prisma.session.delete({
             where: {
                 jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64")
             }

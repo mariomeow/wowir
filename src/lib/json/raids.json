@@ -1,0 +1,68 @@
+[
+    {
+        "id": 94,
+        "name": "Blackwing Lair",
+        "maxAttendance": 40,
+        "reference": "BWL"
+    },
+    {
+        "id": 95,
+        "name": "Molten Core",
+        "maxAttendance": 40,
+        "reference": "MC"
+    },
+    {
+        "id": 96,
+        "name": "Naxxramas",
+        "maxAttendance": 40,
+        "reference": "NAX"
+    },
+    {
+        "id": 97,
+        "name": "Onyxia's Lair",
+        "maxAttendance": 40,
+        "reference": "ONY"
+    },
+    {
+        "id": 98,
+        "name": "Ruins of Ahn'Qiraj",
+        "maxAttendance": 20,
+        "reference": "AQ20"
+    },
+    {
+        "id": 99,
+        "name": "Temple of Ahn'Qiraj",
+        "maxAttendance": 40,
+        "reference": "AQ40"
+    },
+    {
+        "id": 100,
+        "name": "Zul'Gurub",
+        "maxAttendance": 20,
+        "reference": "ZG"
+    },
+    {
+        "id": 101,
+        "name": "Lower Karazhan Halls",
+        "maxAttendance": 10,
+        "reference": "KARA"
+    },
+    {
+        "id": 102,
+        "name": "Emerald Sanctum",
+        "maxAttendance": 40,
+        "reference": "ES"
+    },
+    {
+        "id": 106,
+        "name": "Upper Blackrock Spire",
+        "maxAttendance": 10,
+        "reference": "UBRS"
+    },
+    {
+        "id": 109,
+        "name": "Tower of Karazhan",
+        "maxAttendance": 40,
+        "reference": "TK"
+    }
+]
