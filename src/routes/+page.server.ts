@@ -1,32 +1,39 @@
 import prisma from "$lib/server/prisma"
 
 async function getAllRaids(userId: string) {
-    let allRaids = await prisma.raid.findMany({
+    const allRaids = await prisma.raid.findMany({
         where: {
             raidParticipations: {
                 some: {
-                    userId
+                    userId: "123123"
                 }
             }
         },
         select: {
             instanceId: true,
             createdAt: true,
-            id: true
+            id: true,
+            locked: true,
+            _count: {
+                select: {
+                    raidParticipations: true
+                }
+            }
         },
         orderBy: {
             createdAt: "desc"
         }
     })
 
-    const allRaidsMap = new Map()
+    const raidsStats = new Map()
 
     allRaids.forEach(raid => {
-        allRaidsMap.set(raid.instanceId, allRaidsMap.get(raid.instanceId) ? allRaidsMap.get(raid.instanceId) + 1 : 1)
+        raidsStats.set(raid.instanceId, raidsStats.get(raid.instanceId) ? raidsStats.get(raid.instanceId) + 1 : 1)
     })
 
     return {
-        raidsMap: allRaidsMap,
+        myRaids: allRaids,
+        raidsStats,
         lastFive: allRaids.slice(0, 5)
     }
 }

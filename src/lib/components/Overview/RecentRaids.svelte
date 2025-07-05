@@ -1,24 +1,22 @@
 <script lang="ts">
 	import { raids } from "$lib/data/raids"
 	import { toDate } from "$lib/utils"
-	import LineMdLoadingLoop from "~icons/line-md/loading-loop"
+	import OverviewBox from "../Placeholders/OverviewBox.svelte"
 
 	let { data } = $props()
 </script>
 
 <div class="overview__left__section">
 	<h1 class="overview__h1">Recent Raids</h1>
-	<div class="overview__box">
-		{#await data}
-			<div class="overview__loader">
-				<LineMdLoadingLoop />
-			</div>
-		{:then raidData}
+	{#await data}
+		<OverviewBox />
+	{:then promiseData}
+		<div class="overview__box">
 			<div class="overview__stats">
-				{#if !raidData || raidData.lastFive.length == 0}
+				{#if !promiseData || promiseData.lastFive.length == 0}
 					<p class="overview__placeholder">Your five recent raids will appear here.</p>
 				{:else}
-					{#each raidData.lastFive as { instanceId, createdAt, id }}
+					{#each promiseData.lastFive as { instanceId, createdAt, id }}
 						<a href={`/raid/${id}`}>
 							<p class="stats__d">{raids.get(instanceId)?.name}</p>
 							<p class="stats__n">{toDate(createdAt)}</p>
@@ -26,6 +24,6 @@
 					{/each}
 				{/if}
 			</div>
-		{/await}
-	</div>
+		</div>
+	{/await}
 </div>

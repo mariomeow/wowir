@@ -201,14 +201,6 @@ nav .logo {
     font-weight: normal;
 }
 
-.overview__box {
-    border-radius: 5px;
-    padding: 15px;
-    background-color: var(--nav);
-    border: 1px solid var(--border);
-    transition: border 0.3s;
-}
-
 .overview__right {
     display: flex;
     flex-direction: column;
@@ -353,4 +345,26 @@ nav .logo {
 
 .overview__stats a:hover {
     background-color: var(--hover);
+}
+
+.overview__box {
+    border-radius: 5px;
+    padding: 15px;
+    background-color: var(--nav);
+    border: 1px solid var(--border);
+    transition: border 0.3s;
+}
+
+.shimmer {
+    animation: shimmer 1s infinite linear;
+    min-height: 130px;
+    background: linear-gradient(-45deg, var(--nav) 40%, var(--border) 50%, var(--nav) 60%);
+    background-size: 300%;
+    background-position-x: 100%;
+}
+
+@keyframes shimmer {
+    100% {
+        background-position-x: 0%;
+    }
 }

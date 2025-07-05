@@ -1,5 +1,6 @@
 <script lang="ts">
-	import AllRaids from "$lib/components/Overview/AllRaids.svelte"
+	import MyRaids from "$lib/components/Overview/MyRaids.svelte"
+	import RaidStats from "$lib/components/Overview/RaidStats.svelte"
 	import RecentRaids from "$lib/components/Overview/RecentRaids.svelte"
 
 	let { data } = $props()
@@ -8,25 +9,11 @@
 <div class="overview">
 	<div class="overview__split">
 		<div class="overview__left">
-			<AllRaids data={data.raidData} />
+			<RaidStats data={data.raidData} />
 			<RecentRaids data={data.raidData} />
 		</div>
 		<div class="overview__right">
-			<h1 class="overview__h1">My Raids</h1>
-			<div class="overview__right__boxes">
-				<button class="overview__box">
-					<p>XD</p>
-				</button>
-				<button class="overview__box">
-					<p>XD</p>
-				</button>
-				<button class="overview__box">
-					<p>XD</p>
-				</button>
-				<button class="overview__box">
-					<p>XD</p>
-				</button>
-			</div>
+			<MyRaids data={data.raidData} />
 		</div>
 	</div>
 </div>

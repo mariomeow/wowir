@@ -2,6 +2,15 @@ import { type Handle } from "@sveltejs/kit"
 import JWT from "jsonwebtoken"
 import { JWT_KEY } from "$env/static/private"
 import { authSetup, clearCookies, refreshDiscordToken } from "$lib/server/daMethods"
+import type { ServerInit } from "@sveltejs/kit"
+import cron from "node-cron"
+
+export const init: ServerInit = () => {
+    // NEED TO SETUP DB CLEANUP
+    cron.schedule("0 0 * * *", () => {
+        console.log(123)
+    })
+}
 
 export const handle: Handle = async ({ event, resolve }) => {
     const jwt: string | undefined = event.cookies.get("jwt")
