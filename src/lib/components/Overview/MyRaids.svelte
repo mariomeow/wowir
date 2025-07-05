@@ -1,5 +1,7 @@
 <script lang="ts">
+	import RaidFrame from "../Items/RaidFrame.svelte"
 	import OverviewBox from "../Placeholders/OverviewBox.svelte"
+
 	let { data } = $props()
 </script>
 
@@ -11,9 +13,16 @@
 		{/each}
 	{:then promiseData}
 		{#if !promiseData || promiseData.myRaids.length == 0}
-			NEMA NICEG
+			<p class="overview__placeholder">Your raids will appear here.</p>
 		{:else}
-			HAS DATA
+			{#each promiseData.myRaids as raid}
+				<RaidFrame {raid} />
+				<RaidFrame {raid} />
+				<RaidFrame {raid} />
+				<RaidFrame {raid} />
+				<RaidFrame {raid} />
+				<RaidFrame {raid} />
+			{/each}
 		{/if}
 	{/await}
 </div>

@@ -5,24 +5,32 @@ async function getAllRaids(userId: string) {
         where: {
             raidParticipations: {
                 some: {
-                    userId: "123123"
+                    userId
                 }
             }
         },
         select: {
             instanceId: true,
             createdAt: true,
+            name: true,
             id: true,
             locked: true,
+            host: {
+                select: {
+                    username: true,
+                    id: true
+                }
+            },
             _count: {
                 select: {
                     raidParticipations: true
                 }
             }
         },
-        orderBy: {
-            createdAt: "desc"
-        }
+        orderBy: [
+            { locked: "asc" },
+            { createdAt: "desc" }
+        ]
     })
 
     const raidsStats = new Map()
@@ -33,8 +41,7 @@ async function getAllRaids(userId: string) {
 
     return {
         myRaids: allRaids,
-        raidsStats,
-        lastFive: allRaids.slice(0, 5)
+        raidsStats
     }
 }
 
