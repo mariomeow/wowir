@@ -16,5 +16,5 @@ export function getTimeUntil(dateA: Date, dateB: Date) {
         end: dateB
     })
 
-    return { months: difference.months || 0, days: difference.days || 0, hours: difference.hours || 0, minutes: difference.minutes || 0, seconds: difference.seconds || 0 }
+    return { months: difference.months, days: difference.days, hours: difference.hours, minutes: difference.minutes, seconds: difference.seconds }
 }
