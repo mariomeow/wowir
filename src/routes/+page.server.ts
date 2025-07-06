@@ -1,4 +1,5 @@
 import prisma from "$lib/server/prisma"
+import type { Actions } from "@sveltejs/kit"
 
 async function getAllRaids(userId: string) {
     const allRaids = await prisma.raid.findMany({
@@ -13,6 +14,7 @@ async function getAllRaids(userId: string) {
             instanceId: true,
             createdAt: true,
             name: true,
+            startsAt: true,
             id: true,
             locked: true,
             host: {

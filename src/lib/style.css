@@ -433,6 +433,8 @@ nav .logo {
 
 .overview__raid .overview__raid__title {
     margin-bottom: 5px;
+    color: var(--gray);
+    font-size: var(--font-small);
 }
 
 .overview__raid .overview__raid__createdAt {
