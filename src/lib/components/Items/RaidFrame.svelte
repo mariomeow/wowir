@@ -4,13 +4,21 @@
 	import LucideLockOpen from "~icons/lucide/lock-open"
 	import { raids } from "$lib/data/raids"
 	import { toDate } from "$lib/utils"
+	import { goto } from "$app/navigation"
 
 	let { raid } = $props()
 
 	let raidInfo = $derived(raids.get(raid.instanceId))
 </script>
 
-<div class="overview__box overview__raid">
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div
+	class="overview__box overview__raid"
+	onclick={() => {
+		goto(`/raid/${raid.id}`)
+	}}
+>
 	<div class="overview__header">
 		<div class="overview__header__left">
 			<img

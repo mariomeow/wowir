@@ -33,15 +33,22 @@ async function getAllRaids(userId: string) {
         ]
     })
 
-    const raidsStats = new Map()
-
-    allRaids.forEach(raid => {
-        raidsStats.set(raid.instanceId, raidsStats.get(raid.instanceId) ? raidsStats.get(raid.instanceId) + 1 : 1)
+    const raidStats = await prisma.allTime.findMany({
+        where: {
+            userId
+        },
+        select: {
+            instanceId: true,
+            times_ran: true
+        },
+        orderBy: {
+            times_ran: "desc"
+        }
     })
 
     return {
         myRaids: allRaids,
-        raidsStats
+        raidStats
     }
 }
 

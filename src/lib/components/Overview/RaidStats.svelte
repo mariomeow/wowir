@@ -13,13 +13,13 @@
 		<div class="overview__box">
 			<p>All-Time</p>
 			<div class="overview__stats">
-				{#if !promiseData || promiseData.raidsStats.size == 0}
+				{#if !promiseData || promiseData.raidStats.length == 0}
 					<p class="overview__placeholder">Your raiding history will appear here.</p>
 				{:else}
-					{#each promiseData.raidsStats as [id, count]}
+					{#each promiseData.raidStats as { instanceId, times_ran }}
 						<button>
-							<p class="stats__d">{raids.get(id)?.name}</p>
-							<p class="stats__n">{count}</p>
+							<p class="stats__d">{raids.get(instanceId)?.name}</p>
+							<p class="stats__n">{times_ran}</p>
 						</button>
 					{/each}
 				{/if}

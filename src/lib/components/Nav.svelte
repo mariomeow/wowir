@@ -43,5 +43,6 @@
 		<a href="/create" aria-current={pathname == "/create" && "page"}>Create Raid</a>
 		<a href="/raids" aria-current={pathname == "/raids" && "page"}>My Raids</a>
 		<a href="/resets" aria-current={pathname == "/resets" && "page"}>Raid Resets</a>
+		<a href="/faq" aria-current={pathname == "/faq" && "page"}>FAQ</a>
 	</div>
 </nav>

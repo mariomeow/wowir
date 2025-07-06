@@ -24,6 +24,7 @@ model User {
   sessions              Session[]
   raids                 Raid[]
   raidParticipations    RaidParticipation[]
+  AllTime               AllTime[]
 }
 
 model Raid {
@@ -45,4 +46,12 @@ model RaidParticipation {
   raid     Raid     @relation(fields: [raidId], references: [id], onDelete: Cascade)
   raidId   String
   joinedAt DateTime @default(now())
+}
+
+model AllTime {
+  id         Int    @id @default(autoincrement())
+  instanceId Int
+  times_ran  Int    @default(0)
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
 }

@@ -17,11 +17,6 @@
 		{:else}
 			{#each promiseData.myRaids as raid}
 				<RaidFrame {raid} />
-				<RaidFrame {raid} />
-				<RaidFrame {raid} />
-				<RaidFrame {raid} />
-				<RaidFrame {raid} />
-				<RaidFrame {raid} />
 			{/each}
 		{/if}
 	{/await}
