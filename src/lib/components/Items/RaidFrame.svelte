@@ -47,53 +47,28 @@
 		{#if starts.months}
 			{starts.months > 0 ? "Starts in" : "Started"}
 			{Math.abs(starts.months)}
-			{starts.months > 1
-				? "months"
-				: starts.months == 1
-					? "month"
-					: starts.months == -1
-						? "month ago"
-						: "months ago"}
+			{Math.abs(starts.months) > 1 ? "months" : "month"}
+			{starts.months < 0 ? "ago" : ""}
 		{:else if starts.days}
 			{starts.days > 0 ? "Starts in" : "Started"}
 			{Math.abs(starts.days)}
-			{starts.days > 1
-				? "days"
-				: starts.days == 1
-					? "day"
-					: starts.days == -1
-						? "day ago"
-						: "days ago"}
+			{Math.abs(starts.days) > 1 ? "days" : "day"}
+			{starts.days < 0 ? "ago" : ""}
 		{:else if starts.hours}
 			{starts.hours > 0 ? "Starts in" : "Started"}
 			{Math.abs(starts.hours)}
-			{starts.hours > 1
-				? "hours"
-				: starts.hours == 1
-					? "hour"
-					: starts.hours == -1
-						? "hour ago"
-						: "hours ago"}
+			{Math.abs(starts.hours) > 1 ? "hours" : "hour"}
+			{starts.hours < 0 ? "ago" : ""}
 		{:else if starts.minutes}
 			{starts.minutes > 0 ? "Starts in" : "Started"}
 			{Math.abs(starts.minutes)}
-			{starts.minutes > 1
-				? "minutes"
-				: starts.minutes == 1
-					? "minute"
-					: starts.minutes == -1
-						? "minute ago"
-						: "minutes ago"}
+			{Math.abs(starts.minutes) > 1 ? "minutes" : "minute"}
+			{starts.minutes < 0 ? "ago" : ""}
 		{:else if starts.seconds}
 			{starts.seconds > 0 ? "Starts in" : "Started"}
 			{Math.abs(starts.seconds)}
-			{starts.seconds > 1
-				? "seconds"
-				: starts.seconds == 1
-					? "second"
-					: starts.seconds == -1
-						? "second ago"
-						: "seconds ago"}
+			{Math.abs(starts.seconds) > 1 ? "seconds" : "second"}
+			{starts.seconds < 0 ? "ago" : ""}
 		{:else}
 			Starts now
 		{/if}
