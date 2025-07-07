@@ -35,8 +35,19 @@
 	</div>
 	<div class="dropdown__actions">
 		<a href="/">Home Page <LucideHome /></a>
-		<form action="/logout" method="post">
-			<button type="submit">Log Out <LucideLogIn /></button>
+		<form
+			action="/logout"
+			method="post"
+			onsubmit={(e) => {
+				const formElement = e.currentTarget as HTMLFormElement
+				const submitButton = e.submitter as HTMLButtonElement
+				const span = formElement.querySelector("span") as HTMLSpanElement
+
+				submitButton.disabled = true
+				span.textContent = "Logging out..."
+			}}
+		>
+			<button type="submit"><span>Log Out</span> <LucideLogIn /></button>
 		</form>
 	</div>
 </div>
