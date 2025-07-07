@@ -475,3 +475,12 @@ nav .logo {
 .unlocked {
     color: greenyellow;
 }
+
+.create {
+    margin: 0px auto;
+    width: 40%;
+    height: 400px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    background-color: var(--nav);
+}
