@@ -477,10 +477,135 @@ nav .logo {
 }
 
 .create {
+    padding: 30px;
     margin: 0px auto;
-    width: 40%;
-    height: 400px;
+    width: 35%;
     border: 1px solid var(--border);
     border-radius: 15px;
     background-color: var(--nav);
+    box-sizing: border-box;
+}
+
+.create h1 {
+    font-size: var(--font-big);
+    margin-bottom: 20px;
+}
+
+.create label {
+    color: var(--gray);
+    font-size: var(--font-normal);
+    margin-bottom: 10px;
+    pointer-events: none;
+}
+
+.create input {
+    color: var(--white);
+    caret-color: var(--white);
+    border: 1px solid var(--border);
+    outline: none;
+    border-radius: 5px;
+    background-color: var(--nav);
+}
+
+.create__select {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.create__select input {
+    padding: 10px;
+}
+
+.create__select__wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+}
+
+.create__select__wrapper>button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    color: var(--border-hover);
+    background-color: transparent;
+    outline: none;
+    border: none;
+    right: 10px;
+    cursor: pointer;
+}
+
+.create__select__wrapper button:active {
+    transform: translateY(1px);
+}
+
+.raid__selector::-webkit-scrollbar {
+    background-color: var(--hover);
+    width: 10px;
+}
+
+.raid__selector::-webkit-scrollbar-thumb {
+    background-color: var(--border-hover);
+    border-radius: 10px;
+}
+
+.raid__selector {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    position: absolute;
+    top: calc(100% + 5px);
+    background-color: var(--nav);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-sizing: border-box;
+    padding: 7px 10px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.raid__selector button {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    outline: none;
+    border: none;
+    color: var(--gray);
+    background-color: transparent;
+    cursor: pointer;
+    padding: 10px;
+    text-align: left;
+    border-radius: 5px;
+}
+
+.raid__selector button:hover {
+    background-color: var(--hover);
+}
+
+.raid__selector button.selected {
+    background-color: var(--hover);
+}
+
+.raid__selector .separator {
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 20px max-content auto;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.raid__selector .separator hr {
+    height: 1px;
+    width: 100%;
+    border: none;
+    background-color: var(--border);
+}
+
+.raid__selector .separator span {
+    user-select: none;
+    pointer-events: none;
+    font-size: var(--font-small);
+    color: var(--gray);
 }

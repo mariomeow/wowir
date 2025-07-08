@@ -14,7 +14,7 @@
 	let dropDownElement = $state<HTMLDivElement>()
 </script>
 
-<svelte:window
+<svelte:document
 	onclick={(e) => {
 		if (
 			dropDownElement &&
