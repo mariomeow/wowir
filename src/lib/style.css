@@ -515,6 +515,11 @@ nav .logo {
 
 .create__select input {
     padding: 10px;
+    transition: 0.3s;
+}
+
+.create__select input:focus {
+    border: 1px solid var(--border-hover);
 }
 
 .create__select__wrapper {

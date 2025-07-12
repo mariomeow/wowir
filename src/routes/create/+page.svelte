@@ -1,24 +1,36 @@
 <script lang="ts">
 	import LucideX from "~icons/lucide/x"
 	import LucideCheck from "~icons/lucide/check"
-	import type { RAID_FORM_INPUTS } from "$lib/types"
+	import type { RAID_FORM_INPUTS, RAID_TYPE } from "$lib/types"
 	import { fly } from "svelte/transition"
 	import { raids } from "$lib/data/raids"
+	import { SvelteMap } from "svelte/reactivity"
+	import { onMount } from "svelte"
+
+	function filterRaids(value?: string) {
+		sgRaids.clear()
+
+		raids.forEach((raid) => {
+			if ((value && raid.name.toLowerCase().includes(value.toLowerCase())) || !value) {
+				const attendanceRaids = sgRaids.get(raid.maxAttendance) ?? []
+
+				sgRaids.set(raid.maxAttendance, [...attendanceRaids, raid])
+			}
+		})
+	}
 
 	const formInputs = $state<RAID_FORM_INPUTS>({
 		raid: ""
 	})
 
-	const sgRaids = new Map()
-
-	raids.forEach((raid) => {
-		const categoryRaids: (typeof raid)[] = sgRaids.get(raid.maxAttendance) ?? []
-
-		if (!categoryRaids.includes(raid)) sgRaids.set(raid.maxAttendance, [...categoryRaids, raid])
-	})
-
 	let showRaidDropdown = $state<boolean>(false)
 	let raidDropdownParent = $state<HTMLDivElement | undefined>()
+
+	const sgRaids = new SvelteMap<number, RAID_TYPE[]>()
+
+	onMount(() => {
+		filterRaids()
+	})
 </script>
 
 <svelte:document
@@ -46,6 +58,7 @@
 				onclick={() => {
 					showRaidDropdown = true
 				}}
+				oninput={() => filterRaids(formInputs.raid)}
 			/>
 			{#if formInputs.raid != ""}
 				<button
@@ -58,29 +71,31 @@
 			{/if}
 			{#if showRaidDropdown}
 				<div transition:fly={{ y: -5, duration: 200 }} class="raid__selector">
-					{#each sgRaids.entries() as [key, values]}
-						<div class="separator">
-							<hr />
-							<span>{key}-man</span>
-							<hr />
-						</div>
-						{#each values as { id, name, maxAttendance }}
-							<button
-								class:selected={formInputs.raid == name}
-								onclick={(e) => {
-									e.preventDefault()
+					{#if sgRaids.size > 0}
+						{#each sgRaids.entries() as [key, values]}
+							<div class="separator">
+								<hr />
+								<span>{key}-man</span>
+								<hr />
+							</div>
+							{#each values as { id, name, maxAttendance }}
+								<button
+									class:selected={formInputs.raid == name}
+									onclick={(e) => {
+										e.preventDefault()
 
-									formInputs.raid = name
-									showRaidDropdown = false
-								}}
-							>
-								{#if formInputs.raid == name}
-									<LucideCheck />
-								{/if}
-								{name}
-							</button>
+										formInputs.raid = name
+										showRaidDropdown = false
+									}}
+								>
+									{#if formInputs.raid == name}
+										<LucideCheck />
+									{/if}
+									{name}
+								</button>
+							{/each}
 						{/each}
-					{/each}
+					{/if}
 				</div>
 			{/if}
 		</div>
