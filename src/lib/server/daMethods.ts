@@ -69,6 +69,7 @@ export async function setCookies(cookies: Cookies, urlCode: string) {
             id: user.id,
             username: user.username,
             avatar: user.avatar,
+            isAdmin: user.isAdmin
         }, JWT_KEY, {
             expiresIn: "15m"
         })
@@ -214,6 +215,7 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
             id: newSession.User.id,
             username: newSession.User.username,
             avatar: newSession.User.avatar,
+            isAdmin: newSession.User.isAdmin
         }, JWT_KEY, {
             expiresIn: "15m"
         })
@@ -237,7 +239,8 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
         event.locals.user = {
             id: session.User.id,
             username: session.User.username,
-            avatar: session.User.avatar as string
+            avatar: session.User.avatar as string,
+            isAdmin: session.User.isAdmin
         }
 
         if (!discord_token) {

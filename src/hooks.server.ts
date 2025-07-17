@@ -19,12 +19,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     if (jwt) {
         try {
-            const user = JWT.verify(jwt, JWT_KEY) as { id: string, username: string, avatar: string }
+            const user = JWT.verify(jwt, JWT_KEY) as { id: string, username: string, avatar: string, isAdmin: boolean }
 
             event.locals.user = {
                 id: user.id,
                 username: user.username,
-                avatar: user.avatar
+                avatar: user.avatar,
+                isAdmin: user.isAdmin
             }
 
             if (!discord_access_token) {

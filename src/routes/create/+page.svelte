@@ -32,7 +32,11 @@
 
 	let { data } = $props()
 
-	const { form, enhance, errors, constraints, submitting } = superForm(data.form)
+	const { form, enhance, errors, constraints, submitting } = superForm(data.form, {
+		onResult: (e) => {
+			console.log(e)
+		}
+	})
 </script>
 
 <svelte:document
@@ -65,6 +69,7 @@
 					$errors.instanceId = undefined
 				}}
 				class:inputerror={$errors.instanceId}
+				autocomplete="off"
 			/>
 			{#if $form.raid != undefined}
 				<button
@@ -131,6 +136,7 @@
 			oninput={() => {
 				$errors.name = undefined
 			}}
+			autocomplete="off"
 		/>
 	</div>
 	<div class="create__split">
