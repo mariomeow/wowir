@@ -477,18 +477,20 @@ nav .logo {
 }
 
 .create {
+    width: 35%;
     padding: 30px;
     margin: 0px auto;
-    width: 35%;
     border: 1px solid var(--border);
     border-radius: 15px;
     background-color: var(--nav);
     box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 
 .create h1 {
     font-size: var(--font-big);
-    margin-bottom: 20px;
 }
 
 .create label {
@@ -505,21 +507,20 @@ nav .logo {
     outline: none;
     border-radius: 5px;
     background-color: var(--nav);
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    transition: 0.3s;
+}
+
+.create input:focus {
+    border: 1px solid var(--border-hover);
 }
 
 .create__select {
     position: relative;
     display: grid;
     grid-template-columns: 1fr;
-}
-
-.create__select input {
-    padding: 10px;
-    transition: 0.3s;
-}
-
-.create__select input:focus {
-    border: 1px solid var(--border-hover);
 }
 
 .create__select__wrapper {
@@ -569,6 +570,7 @@ nav .logo {
     padding: 7px 10px;
     max-height: 300px;
     overflow: auto;
+    z-index: 1;
 }
 
 .raid__selector button {
@@ -613,4 +615,44 @@ nav .logo {
     pointer-events: none;
     font-size: var(--font-small);
     color: var(--gray);
+}
+
+.raid__selector .empty {
+    outline: none;
+    border: none;
+    color: var(--gray);
+    background-color: transparent;
+    padding: 10px;
+    text-align: left;
+    border-radius: 5px;
+    font-size: var(--font-normal);
+}
+
+.create__solo {
+    display: flex;
+    flex-direction: column;
+}
+
+.create__solo input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create__split {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.input__group {
+    display: flex;
+    flex-direction: column;
+}
+
+.dateinput {
+    cursor: pointer;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }

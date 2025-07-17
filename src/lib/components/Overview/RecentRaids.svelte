@@ -16,10 +16,10 @@
 				{#if !promiseData || promiseData.myRaids.length == 0}
 					<p class="overview__placeholder">Your five recent raids will appear here.</p>
 				{:else}
-					{#each promiseData.myRaids.slice(0, 5) as { instanceId, id, createdAt }}
+					{#each promiseData.myRaids.slice(0, 5) as { instanceId, id, startsAt }}
 						<a href={`/raid/${id}`}>
 							<p class="stats__d">{raids.get(instanceId)?.name}</p>
-							<p class="stats__n">{toDate(createdAt)}</p>
+							<p class="stats__n">{toDate(startsAt)}</p>
 						</a>
 					{/each}
 				{/if}

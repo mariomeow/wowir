@@ -74,7 +74,7 @@
 		{/if}
 	</p>
 	<div class="overview__raid__split">
-		<p class="overview__raid__createdAt">Created at: {toDate(raid.createdAt)}</p>
+		<p class="overview__raid__createdAt">Starts at: {toDate(raid.startsAt)}</p>
 		<p class="overview__raid__createdAt">
 			{raid._count.raidParticipations} / {raidInfo?.maxAttendance}
 		</p>

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import LucideX from "~icons/lucide/x"
 	import LucideCheck from "~icons/lucide/check"
-	import type { RAID_FORM_INPUTS, RAID_TYPE } from "$lib/types"
+	import type { RAID_TYPE } from "$lib/types"
 	import { fly } from "svelte/transition"
 	import { raids } from "$lib/data/raids"
 	import { SvelteMap } from "svelte/reactivity"
 	import { onMount } from "svelte"
+	import { superForm } from "sveltekit-superforms"
 
 	function filterRaids(value?: string) {
 		sgRaids.clear()
@@ -19,58 +20,57 @@
 		})
 	}
 
-	const formInputs = $state<RAID_FORM_INPUTS>({
-		raid: ""
-	})
-
 	let showRaidDropdown = $state<boolean>(false)
-	let raidDropdownParent = $state<HTMLDivElement | undefined>()
 
 	const sgRaids = new SvelteMap<number, RAID_TYPE[]>()
 
 	onMount(() => {
 		filterRaids()
 	})
+
+	let { data } = $props()
+
+	const { form, enhance } = superForm(data.form)
 </script>
 
 <svelte:document
-	onclick={(e) => {
-		if (
-			raidDropdownParent &&
-			e.target != raidDropdownParent &&
-			!raidDropdownParent.contains(e.target as HTMLElement)
-		) {
+	onclick={() => {
+		if (showRaidDropdown && !raids.values().find((item) => item.name == $form.raid)) {
 			showRaidDropdown = false
+			$form.raid = undefined
+			$form.instanceId = -1
+			filterRaids()
 		}
 	}}
 />
 
-<form action="/?create" method="post" class="create">
+<form method="post" class="create" use:enhance>
 	<h1>New Raid</h1>
 	<div class="create__select">
 		<label for="raid">Raid</label>
-		<div class="create__select__wrapper" bind:this={raidDropdownParent}>
+		<div id="raid" class="create__select__wrapper">
 			<input
-				id="raid"
 				type="text"
 				placeholder="Select a raid"
-				bind:value={formInputs.raid}
-				onclick={() => {
+				bind:value={$form.raid}
+				onclick={(e) => {
+					e.stopPropagation()
 					showRaidDropdown = true
 				}}
-				oninput={() => filterRaids(formInputs.raid)}
+				oninput={() => filterRaids($form.raid)}
 			/>
-			{#if formInputs.raid != ""}
+			{#if $form.raid != undefined}
 				<button
 					onclick={(e) => {
 						e.preventDefault()
 
-						formInputs.raid = ""
+						$form.raid = undefined
+						$form.instanceId = -1
 					}}><LucideX /></button
 				>
 			{/if}
 			{#if showRaidDropdown}
-				<div transition:fly={{ y: -5, duration: 200 }} class="raid__selector">
+				<div in:fly={{ y: -5, duration: 200 }} class="raid__selector">
 					{#if sgRaids.size > 0}
 						{#each sgRaids.entries() as [key, values]}
 							<div class="separator">
@@ -78,36 +78,69 @@
 								<span>{key}-man</span>
 								<hr />
 							</div>
-							{#each values as { id, name, maxAttendance }}
+							{#each values as { id, name }}
 								<button
-									class:selected={formInputs.raid == name}
+									class:selected={$form.raid == name}
 									onclick={(e) => {
 										e.preventDefault()
 
-										formInputs.raid = name
+										$form.raid = name
+										$form.instanceId = id
 										showRaidDropdown = false
 									}}
 								>
-									{#if formInputs.raid == name}
+									{#if $form.raid == name}
 										<LucideCheck />
 									{/if}
 									{name}
 								</button>
 							{/each}
 						{/each}
+					{:else}
+						<span class="empty">No raids found.</span>
 					{/if}
 				</div>
 			{/if}
 		</div>
 	</div>
-	<input type="text" placeholder="Enter a raid title" />
-	<div class="create__split">
-		<input type="number" />
-		<input type="date" />
-		<input type="time" />
+	<input type="text" name="instanceId" bind:value={$form.instanceId} />
+	<div class="create__solo">
+		<label for="raid_name">Raid name</label>
+		<input
+			id="raid_name"
+			type="text"
+			placeholder="Enter a raid title"
+			maxlength="100"
+			name="name"
+			bind:value={$form.name}
+		/>
 	</div>
 	<div class="create__split">
-		<input type="text" placeholder="MAX SRS per person" />
+		<div class="input__group">
+			<label for="sr">Max. SR per person</label>
+			<input
+				id="sr"
+				type="number"
+				placeholder="MAX SRS per person"
+				min="1"
+				max="3"
+				bind:value={$form.max_sr}
+				name="max_sr"
+			/>
+		</div>
+		<div class="input__group">
+			<label for="date">Start time</label>
+			<input
+				class="dateinput"
+				id="date"
+				type="date"
+				placeholder="Pick a start date and time"
+				name="date"
+				bind:value={$form.date}
+			/>
+		</div>
 	</div>
-	// hard reserve checkmark // sr+ // ban list
+	<button type="submit">Create</button>
 </form>
+
+// hard reserve checkmark (FUTURE) // sr+ (FUTURE) // ban list (FUTURE) // COMMENTS (FUTURE)

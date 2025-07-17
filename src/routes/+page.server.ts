@@ -11,7 +11,6 @@ async function getAllRaids(userId: string) {
         },
         select: {
             instanceId: true,
-            createdAt: true,
             name: true,
             startsAt: true,
             id: true,
@@ -30,7 +29,7 @@ async function getAllRaids(userId: string) {
         },
         orderBy: [
             { locked: "asc" },
-            { createdAt: "desc" }
+            { startsAt: "desc" }
         ]
     })
 

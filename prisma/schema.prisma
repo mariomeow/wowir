@@ -31,7 +31,6 @@ model Raid {
   id                 String              @id @default(uuid(7))
   name               String
   instanceId         Int
-  createdAt          DateTime            @default(now())
   startsAt           DateTime            @default(now())
   locked             Boolean             @default(false)
   host               User                @relation(fields: [hostId], references: [id], onDelete: Cascade)
@@ -49,9 +48,10 @@ model RaidParticipation {
 }
 
 model AllTime {
-  id         Int    @id @default(autoincrement())
   instanceId Int
   times_ran  Int    @default(0)
   user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String
+
+  @@id([userId, instanceId])
 }
