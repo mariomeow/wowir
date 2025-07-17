@@ -34,6 +34,11 @@
     --font-small: 12px;
     font-family: "Geist";
     color: var(--white);
+    --date-input-width: 100%;
+    --date-picker-background: #0A0A0A;
+    --date-picker-foreground: #f7f7f7;
+    --date-picker-highlight-border: #5a5a5a;
+    --date-picker-highlight-shadow: transparent;
 }
 
 body {
@@ -231,7 +236,7 @@ nav .logo {
     position: relative;
 }
 
-.dropdown {
+.dropdown__element {
     color: var(--white);
     position: absolute;
     top: 50px;
@@ -242,7 +247,7 @@ nav .logo {
     min-width: 230px;
 }
 
-.dropdown p {
+.dropdown__element p {
     font-size: var(--font-normal);
 }
 
@@ -655,4 +660,90 @@ nav .logo {
 
 ::-webkit-calendar-picker-indicator {
     filter: invert(1);
+}
+
+.date-time-field {
+    height: 100%;
+}
+
+.date-time-field input {
+    transition: 0.3s !important;
+    border-radius: 5px !important;
+    height: 100%;
+    border: 1px solid var(--border) !important;
+}
+
+.date-time-field input:focus {
+    border: 1px solid var(--border-hover) !important;
+}
+
+.picker {
+    width: 100%;
+}
+
+.date-time-picker {
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.create .submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    height: 40px;
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+    font-size: var(--font-normal);
+    font-weight: bold;
+}
+
+.create .submit:hover {
+    background-color: #c2c2c2;
+}
+
+.create .submit svg {
+    font-size: var(--font-normal);
+}
+
+.create .required {
+    color: red;
+}
+
+.inputerror {
+    border: 1px solid red !important;
+}
+
+.todos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 60%;
+    margin: 0px auto;
+    gap: 20px;
+    grid-auto-rows: minmax(200px, max-content);
+}
+
+.todos .todo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: var(--nav);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.todos .todo a {
+    font-size: var(--font-big);
+    color: var(--white);
+    text-decoration: none;
+}
+
+.todos .todo ul {
+    list-style-position: inside;
 }

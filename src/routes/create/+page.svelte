@@ -7,6 +7,8 @@
 	import { SvelteMap } from "svelte/reactivity"
 	import { onMount } from "svelte"
 	import { superForm } from "sveltekit-superforms"
+	import { DateInput } from "date-picker-svelte"
+	import LucideLoader from "~icons/lucide/loader"
 
 	function filterRaids(value?: string) {
 		sgRaids.clear()
@@ -30,7 +32,7 @@
 
 	let { data } = $props()
 
-	const { form, enhance } = superForm(data.form)
+	const { form, enhance, errors, constraints, submitting } = superForm(data.form)
 </script>
 
 <svelte:document
@@ -47,9 +49,10 @@
 <form method="post" class="create" use:enhance>
 	<h1>New Raid</h1>
 	<div class="create__select">
-		<label for="raid">Raid</label>
+		<label for="raid">Raid <span class="required">*</span></label>
 		<div id="raid" class="create__select__wrapper">
 			<input
+				name="raid"
 				type="text"
 				placeholder="Select a raid"
 				bind:value={$form.raid}
@@ -57,7 +60,11 @@
 					e.stopPropagation()
 					showRaidDropdown = true
 				}}
-				oninput={() => filterRaids($form.raid)}
+				oninput={() => {
+					filterRaids($form.raid)
+					$errors.instanceId = undefined
+				}}
+				class:inputerror={$errors.instanceId}
 			/>
 			{#if $form.raid != undefined}
 				<button
@@ -87,6 +94,7 @@
 										$form.raid = name
 										$form.instanceId = id
 										showRaidDropdown = false
+										$errors.instanceId = undefined
 									}}
 								>
 									{#if $form.raid == name}
@@ -103,44 +111,53 @@
 			{/if}
 		</div>
 	</div>
-	<input type="text" name="instanceId" bind:value={$form.instanceId} />
+	<input
+		type="hidden"
+		name="instanceId"
+		bind:value={$form.instanceId}
+		min={$constraints.instanceId?.min}
+	/>
 	<div class="create__solo">
-		<label for="raid_name">Raid name</label>
+		<label for="raid_name">Raid name <span class="required">*</span></label>
 		<input
 			id="raid_name"
 			type="text"
 			placeholder="Enter a raid title"
-			maxlength="100"
+			maxlength={$constraints.name?.maxlength}
+			minlength={$constraints.name?.minlength}
 			name="name"
 			bind:value={$form.name}
+			class:inputerror={$errors.name}
+			oninput={() => {
+				$errors.name = undefined
+			}}
 		/>
 	</div>
 	<div class="create__split">
 		<div class="input__group">
-			<label for="sr">Max. SR per person</label>
+			<label for="sr">Max. SR per person <span class="required">*</span></label>
 			<input
 				id="sr"
 				type="number"
 				placeholder="MAX SRS per person"
-				min="1"
-				max="3"
+				min={$constraints.max_sr?.min}
+				max={$constraints.max_sr?.max}
 				bind:value={$form.max_sr}
 				name="max_sr"
+				class:inputerror={$errors.max_sr}
 			/>
 		</div>
 		<div class="input__group">
-			<label for="date">Start time</label>
-			<input
-				class="dateinput"
-				id="date"
-				type="date"
-				placeholder="Pick a start date and time"
-				name="date"
-				bind:value={$form.date}
-			/>
+			<label for="date">Starting time <span class="required">*</span></label>
+			<DateInput id="date" bind:value={$form.date} min={new Date()} timePrecision="minute" />
+			<input type="hidden" name="date" bind:value={$form.date} />
 		</div>
 	</div>
-	<button type="submit">Create</button>
+	<button class="submit" type="submit" disabled={$submitting}>
+		{#if !$submitting}
+			Create
+		{:else}
+			<LucideLoader />
+		{/if}
+	</button>
 </form>
-
-// hard reserve checkmark (FUTURE) // sr+ (FUTURE) // ban list (FUTURE) // COMMENTS (FUTURE)

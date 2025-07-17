@@ -26,7 +26,7 @@
 />
 
 <div
-	class="dropdown"
+	class="dropdown__element"
 	transition:fade={{ duration: 300, easing: backOut }}
 	bind:this={dropDownElement}
 >

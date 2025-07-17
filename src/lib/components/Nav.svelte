@@ -44,5 +44,8 @@
 		<a href="/raids" aria-current={pathname == "/raids" && "page"}>My Raids</a>
 		<a href="/resets" aria-current={pathname == "/resets" && "page"}>Raid Resets</a>
 		<a href="/faq" aria-current={pathname == "/faq" && "page"}>FAQ</a>
+		{#if user?.id == "361181982115495936"}
+			<a href="/todo" aria-current={pathname == "/todo" && "page"}>Todo</a>
+		{/if}
 	</div>
 </nav>
