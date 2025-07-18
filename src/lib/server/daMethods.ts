@@ -78,8 +78,7 @@ export async function setCookies(cookies: Cookies, urlCode: string) {
             secure: true,
             path: "/",
             httpOnly: true,
-            //expires: new Date(Date.now() + 1000 * 60 * 15),
-            expires: new Date(Date.now() + 1000 * 10),
+            expires: new Date(Date.now() + 1000 * 60 * 15),
             sameSite: "lax"
         })
 
@@ -216,8 +215,7 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string |
             secure: true,
             path: "/",
             httpOnly: true,
-            //expires: new Date(Date.now() + 1000 * 60 * 15),
-            expires: new Date(Date.now() + 1000 * 10),
+            expires: new Date(Date.now() + 1000 * 60 * 15),
             sameSite: "lax"
         })
 
