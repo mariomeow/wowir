@@ -3,7 +3,7 @@
 	import LucideCheck from "~icons/lucide/check"
 	import type { RAID_TYPE } from "$lib/types"
 	import { fly } from "svelte/transition"
-	import { raids } from "$lib/data/raids"
+	import raids from "$lib/data/raids"
 	import { SvelteMap } from "svelte/reactivity"
 	import { onMount } from "svelte"
 	import { superForm } from "sveltekit-superforms"

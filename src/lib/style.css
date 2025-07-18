@@ -29,6 +29,7 @@
     --white: #eeeeee;
     --hover: #1F1F1F;
     --gray: gray;
+    --font-huge: 30px;
     --font-big: 21px;
     --font-normal: 14px;
     --font-small: 12px;
@@ -746,4 +747,69 @@ nav .logo {
 
 .todos .todo ul {
     list-style-position: inside;
+}
+
+.resets {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0px auto;
+    gap: 20px;
+    width: 70%;
+}
+
+.resets select {
+    top: 0px;
+    right: -15px;
+    transform: translateX(100%);
+    position: absolute;
+}
+
+.reset__group {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(220px, max-content);
+}
+
+.reset__item {
+    position: relative;
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    transition: border 0.3s;
+    background-size: cover;
+}
+
+.reset__item:hover {
+    border: 1px solid var(--border-hover);
+}
+
+.reset__item__shadow {
+    backdrop-filter: blur(5px);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.reset__item__data {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    gap: 10px;
+}
+
+.reset__item__data h1 {
+    font-size: var(--font-huge);
+}
+
+.reset__item__data p {
+    color: var(--white);
+    font-size: var(--font-normal);
 }

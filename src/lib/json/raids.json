@@ -3,66 +3,77 @@
         "id": 94,
         "name": "Blackwing Lair",
         "maxAttendance": 40,
-        "reference": "BWL"
+        "reference": "BWL",
+        "reset_days": 7
     },
     {
         "id": 95,
         "name": "Molten Core",
         "maxAttendance": 40,
-        "reference": "MC"
+        "reference": "MC",
+        "reset_days": 7
     },
     {
         "id": 96,
         "name": "Naxxramas",
         "maxAttendance": 40,
-        "reference": "NAX"
+        "reference": "NAX",
+        "reset_days": 7
     },
     {
         "id": 97,
         "name": "Onyxia's Lair",
         "maxAttendance": 40,
-        "reference": "ONY"
+        "reference": "ONY",
+        "reset_days": 5
     },
     {
         "id": 98,
         "name": "Ruins of Ahn'Qiraj",
         "maxAttendance": 20,
-        "reference": "AQ20"
+        "reference": "AQ20",
+        "reset_days": 3
     },
     {
         "id": 99,
         "name": "Temple of Ahn'Qiraj",
         "maxAttendance": 40,
-        "reference": "AQ40"
+        "reference": "AQ40",
+        "reset_days": 7
     },
     {
         "id": 100,
         "name": "Zul'Gurub",
         "maxAttendance": 20,
-        "reference": "ZG"
+        "reference": "ZG",
+        "reset_days": 3
     },
     {
         "id": 101,
         "name": "Lower Karazhan Halls",
         "maxAttendance": 10,
-        "reference": "KARA"
+        "reference": "KARA",
+        "reset_days": 5
     },
     {
         "id": 102,
         "name": "Emerald Sanctum",
         "maxAttendance": 40,
-        "reference": "ES"
+        "reference": "ES",
+        "reset_days": 7
     },
     {
         "id": 106,
         "name": "Upper Blackrock Spire",
         "maxAttendance": 10,
-        "reference": "UBRS"
+        "reference": "UBRS",
+        "reset_days": 0
     },
     {
         "id": 109,
         "name": "Tower of Karazhan",
         "maxAttendance": 40,
-        "reference": "TK"
+        "reference": "TK",
+        "reset_days": 5
     }
 ]

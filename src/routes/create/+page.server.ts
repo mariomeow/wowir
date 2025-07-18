@@ -2,7 +2,7 @@ import { z } from "zod/v4"
 import { superValidate } from "sveltekit-superforms"
 import { zod4 } from "sveltekit-superforms/adapters"
 import { fail, redirect, type Actions } from "@sveltejs/kit"
-import { raids } from "$lib/data/raids"
+import raids from "$lib/data/raids"
 import prisma from "$lib/server/prisma"
 
 const createRaidSchema = z.object({

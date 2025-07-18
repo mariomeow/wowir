@@ -2,7 +2,7 @@
 	import LucideExternalLink from "~icons/lucide/external-link"
 	import LucideLock from "~icons/lucide/lock"
 	import LucideLockOpen from "~icons/lucide/lock-open"
-	import { raids } from "$lib/data/raids"
+	import raids from "$lib/data/raids"
 	import { getTimeUntil, toDate } from "$lib/utils"
 	import { goto } from "$app/navigation"
 

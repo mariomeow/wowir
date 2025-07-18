@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { raids } from "$lib/data/raids"
+	import raids from "$lib/data/raids"
 	import OverviewBox from "../Placeholders/OverviewBox.svelte"
 
 	let { data } = $props()
