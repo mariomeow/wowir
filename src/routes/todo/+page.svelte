@@ -8,4 +8,10 @@
 			<li>comments</li>
 		</ul>
 	</div>
+	<div class="todo">
+		<a href="/resets">Raid Resets</a>
+		<ul>
+			<li>add thel'abim servers and their own lockout trackers</li>
+		</ul>
+	</div>
 </div>
