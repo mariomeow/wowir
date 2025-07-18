@@ -6,7 +6,7 @@ import type { ServerInit } from "@sveltejs/kit"
 import cron from "node-cron"
 
 export const init: ServerInit = () => {
-    // NEED TO SETUP DB CLEANUP
+    // NEED TO SETUP DB CLEANUP, DELETE ALL SESSIONS WHERE EXPIRESAT < DATENOW
     cron.schedule("0 0 * * *", () => {
         console.log(123)
     })

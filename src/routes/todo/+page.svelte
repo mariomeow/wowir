@@ -9,10 +9,10 @@
 		</ul>
 	</div>
 	<div class="todo">
-		<a href="/resets">Raid Resets</a>
+		<a href="/">Home</a>
 		<ul>
-			<li>add thel'abim servers and their own lockout trackers</li>
-			<li>edit dropdown style</li>
+			<li>Add pagination to raids above x amount</li>
+			<li>Move raid loading to a GET endpoint</li>
 		</ul>
 	</div>
 </div>

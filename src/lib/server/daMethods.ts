@@ -179,27 +179,17 @@ export async function refreshDiscordToken(event: RequestEvent, userId: string) {
 export async function authSetup(event: RequestEvent, jwt_refresh_token: string | undefined, discord_token: string | undefined) {
     if (!jwt_refresh_token) error(500, "No JWT Refresh Token")
 
-    const [_, session] = await prisma.$transaction([
-        prisma.session.deleteMany({
-            where: {
-                jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64"),
-                expiresAt: {
-                    lt: new Date()
-                }
+    const session = await prisma.session.findUnique({
+        where: {
+            jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64"),
+            expiresAt: {
+                gt: new Date()
             }
-        }),
-        prisma.session.findUnique({
-            where: {
-                jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64"),
-                expiresAt: {
-                    gt: new Date()
-                }
-            },
-            include: {
-                User: true
-            }
-        })
-    ])
+        },
+        include: {
+            User: true
+        }
+    })
 
     if (session) {
         const jwt = JWT.sign({
