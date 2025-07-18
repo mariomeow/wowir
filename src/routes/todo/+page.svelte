@@ -12,6 +12,7 @@
 		<a href="/resets">Raid Resets</a>
 		<ul>
 			<li>add thel'abim servers and their own lockout trackers</li>
+			<li>edit dropdown style</li>
 		</ul>
 	</div>
 </div>
