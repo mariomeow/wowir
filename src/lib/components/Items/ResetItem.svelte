@@ -1,11 +1,16 @@
 <script lang="ts">
-	import resets from "$lib/data/resets"
+	import { pveResets, pvpResets } from "$lib/data/resets"
 	import type { RAID_TYPE } from "$lib/types"
 	import { differenceInSeconds } from "date-fns"
 
-	let { raid, currentDate }: { raid: RAID_TYPE; currentDate: Date } = $props()
+	let { raid, server }: { raid: RAID_TYPE; server: string } = $props()
 
-	let seconds: number = $state<number>(differenceInSeconds(resets.get(raid.id)!, currentDate))
+	let seconds: number = $state<number>(
+		differenceInSeconds(
+			server == "Nordanaar" ? pveResets.get(raid.id)! : pvpResets.get(raid.id)!,
+			new Date()
+		)
+	)
 
 	const timeFields = $derived.by(() => {
 		return {

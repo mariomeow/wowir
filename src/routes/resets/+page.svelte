@@ -4,7 +4,6 @@
 	import raids from "$lib/data/raids"
 
 	let server = $state<string>(servers[0])
-	const currentDate: Date = new Date()
 </script>
 
 <div class="resets">
@@ -20,7 +19,7 @@
 				.toArray()
 				.filter((item) => item.reset_days != 0)
 				.sort((a, b) => b.reset_days - a.reset_days) as raid}
-				<ResetItem {raid} {currentDate} />
+				<ResetItem {raid} {server} />
 			{/each}
 		</div>
 	{:else}
@@ -30,7 +29,7 @@
 				.toArray()
 				.filter((item) => item.reset_days != 0)
 				.sort((a, b) => b.reset_days - a.reset_days) as raid}
-				<ResetItem {raid} {currentDate} />
+				<ResetItem {raid} {server} />
 			{/each}
 		</div>
 	{/if}
