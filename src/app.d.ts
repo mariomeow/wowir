@@ -6,10 +6,10 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
-			user: USER_TYPE
+			user: USER_TYPE | null
 		}
 		interface PageData {
-			user: USER_TYPE
+			user: USER_TYPE | null
 		}
 		// interface PageState {}
 		// interface Platform {}

@@ -32,11 +32,7 @@
 
 	let { data } = $props()
 
-	const { form, enhance, errors, constraints, submitting } = superForm(data.form, {
-		onResult: (e) => {
-			console.log(e)
-		}
-	})
+	const { form, enhance, errors, constraints, submitting } = superForm(data.form)
 </script>
 
 <svelte:document

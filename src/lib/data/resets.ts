@@ -1,8 +1,6 @@
 function getNextReset(referenceDate: Date, dayInterval: number) {
     const now: Date = new Date()
 
-    console.log(now)
-
     const intervalMs: number = dayInterval * (1000 * 60 * 60 * 24)
 
     const elapsedMs: number = now.getTime() - referenceDate.getTime()

@@ -813,3 +813,21 @@ nav .logo {
     color: var(--white);
     font-size: var(--font-normal);
 }
+
+.resets select {
+    width: 120px;
+    appearance: base-select;
+    font-size: var(--font-normal);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+    color: var(--white);
+    background-color: transparent;
+}
+
+.resets select option {
+    color: var(--gray);
+    background-color: var(--nav);
+}

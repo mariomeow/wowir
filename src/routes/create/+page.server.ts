@@ -39,13 +39,13 @@ export const actions: Actions = {
                         name: form.data.name,
                         instanceId: form.data.instanceId,
                         startsAt: form.data.date,
-                        hostId: locals.user.id
+                        hostId: locals.user!.id
                     }
                 })
 
                 await tx.raidParticipation.create({
                     data: {
-                        userId: locals.user.id,
+                        userId: locals.user!.id,
                         raidId: raid.id
                     }
                 })
@@ -53,7 +53,7 @@ export const actions: Actions = {
                 await tx.allTime.upsert({
                     where: {
                         userId_instanceId: {
-                            userId: locals.user.id,
+                            userId: locals.user!.id,
                             instanceId: form.data.instanceId
                         }
                     },
@@ -64,7 +64,7 @@ export const actions: Actions = {
                     },
                     create: {
                         instanceId: form.data.instanceId,
-                        userId: locals.user.id
+                        userId: locals.user!.id
                     }
                 })
 
