@@ -8,8 +8,8 @@
 
 <div class="resets">
 	<select bind:value={server}>
-		{#each servers as server}
-			<option value={server}>{server}</option>
+		{#each servers as serverName}
+			<option value={serverName}>{serverName}</option>
 		{/each}
 	</select>
 	{#if server == "Nordanaar"}

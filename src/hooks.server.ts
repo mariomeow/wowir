@@ -44,8 +44,6 @@ export const handle: Handle = async ({ event, resolve }) => {
         } catch (error) {
             clearCookies(event)
         }
-    } else {
-        clearCookies(event)
     }
 
     return await resolve(event)

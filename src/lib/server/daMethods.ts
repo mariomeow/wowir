@@ -1,4 +1,4 @@
-import { type Cookies, type RequestEvent } from "@sveltejs/kit"
+import { error, type Cookies, type RequestEvent } from "@sveltejs/kit"
 import { OAuth2RequestError, ArcticFetchError } from "arctic"
 import { discord } from "$lib/server/authProviders"
 import prisma from "./prisma"
@@ -78,7 +78,8 @@ export async function setCookies(cookies: Cookies, urlCode: string) {
             secure: true,
             path: "/",
             httpOnly: true,
-            expires: new Date(Date.now() + 1000 * 60 * 15),
+            //expires: new Date(Date.now() + 1000 * 60 * 15),
+            expires: new Date(Date.now() + 1000 * 10),
             sameSite: "lax"
         })
 
@@ -176,46 +177,37 @@ export async function refreshDiscordToken(event: RequestEvent, userId: string) {
     }
 }
 
-export async function authSetup(event: RequestEvent, jwt_refresh_token: string, discord_token?: string) {
-    const session = await prisma.session.findUnique({
-        where: {
-            jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64"),
-            expiresAt: {
-                gt: new Date()
+export async function authSetup(event: RequestEvent, jwt_refresh_token: string | undefined, discord_token: string | undefined) {
+    if (!jwt_refresh_token) error(500, "No JWT Refresh Token")
+
+    const [_, session] = await prisma.$transaction([
+        prisma.session.deleteMany({
+            where: {
+                jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64"),
+                expiresAt: {
+                    lt: new Date()
+                }
             }
-        },
-        include: {
-            User: true
-        }
-    })
+        }),
+        prisma.session.findUnique({
+            where: {
+                jwt_refresh_token_hash: crypto.createHash("sha256").update(jwt_refresh_token).digest("base64"),
+                expiresAt: {
+                    gt: new Date()
+                }
+            },
+            include: {
+                User: true
+            }
+        })
+    ])
 
     if (session) {
-        const new_jwt_refresh_token: string = crypto.randomBytes(32).toString("hex")
-        const new_jwt_refresh_token_hash: string = crypto.createHash("sha256").update(new_jwt_refresh_token).digest("base64")
-
-        const [_, newSession] = await prisma.$transaction([
-            prisma.session.delete({
-                where: {
-                    id: session.id
-                }
-            }),
-            prisma.session.create({
-                data: {
-                    userId: session.User.id,
-                    jwt_refresh_token_hash: new_jwt_refresh_token_hash,
-                    expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 90)
-                },
-                include: {
-                    User: true
-                }
-            })
-        ])
-
         const jwt = JWT.sign({
-            id: newSession.User.id,
-            username: newSession.User.username,
-            avatar: newSession.User.avatar,
-            isAdmin: newSession.User.isAdmin
+            id: session.User.id,
+            username: session.User.username,
+            avatar: session.User.avatar,
+            isAdmin: session.User.isAdmin
         }, JWT_KEY, {
             expiresIn: "15m"
         })
@@ -224,16 +216,9 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
             secure: true,
             path: "/",
             httpOnly: true,
-            expires: new Date(Date.now() + 1000 * 60 * 15),
+            //expires: new Date(Date.now() + 1000 * 60 * 15),
+            expires: new Date(Date.now() + 1000 * 10),
             sameSite: "lax"
-        })
-
-        event.cookies.set("jwt_refresh_token", new_jwt_refresh_token, {
-            secure: true,
-            path: "/",
-            httpOnly: true,
-            sameSite: "lax",
-            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 90)
         })
 
         event.locals.user = {
@@ -246,5 +231,7 @@ export async function authSetup(event: RequestEvent, jwt_refresh_token: string, 
         if (!discord_token) {
             await refreshDiscordToken(event, session.User.id)
         }
+    } else {
+        error(500, "No session found")
     }
 }
