@@ -4,9 +4,10 @@ import { json } from "@sveltejs/kit"
 export async function GET({ setHeaders, url, locals }) {
     if (!locals.user) return new Response(null)
 
-    const page: number | null = Number(url.searchParams.get("page"))
+    const searchParam_page: string | null = url.searchParams.get("page")
+    const page: number = Number(searchParam_page) || 0
 
-    const allRaids = await prisma.raid.findMany({
+    const myRaids = await prisma.raid.findMany({
         where: {
             raidParticipations: {
                 some: {
@@ -37,28 +38,17 @@ export async function GET({ setHeaders, url, locals }) {
             { startsAt: "desc" }
         ],
         take: 6,
-        skip: !isNaN(page) ? Number(page) * 6 : 0
+        skip: page * 6
     })
 
-    const raidStats = await prisma.allTime.findMany({
-        where: {
-            userId: locals.user.id
-        },
-        select: {
-            instanceId: true,
-            times_ran: true
-        },
-        orderBy: {
-            times_ran: "desc"
-        }
-    })
+    console.log(myRaids)
 
     setHeaders({
         "Cache-Control": "no-cache"
     })
 
     return json({
-        myRaids: allRaids,
-        raidStats
+        myRaids,
+        page
     })
 }
