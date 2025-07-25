@@ -1,7 +1,7 @@
 import { intervalToDuration } from "date-fns"
 
-export function toDate(unformattedDate: Date) {
-    return unformattedDate.toLocaleString("en-gb", {
+export function toDate(unformattedDate: string | Date) {
+    return new Date(unformattedDate).toLocaleString("en-gb", {
         day: "2-digit",
         month: "2-digit",
         year: "2-digit",

@@ -1,53 +1,14 @@
-import prisma from "$lib/server/prisma"
+import { getRequestEvent } from "$app/server"
 
-async function getAllRaids(userId: string) {
-    const allRaids = await prisma.raid.findMany({
-        where: {
-            raidParticipations: {
-                some: {
-                    userId
-                }
-            }
-        },
-        select: {
-            instanceId: true,
-            name: true,
-            startsAt: true,
-            id: true,
-            locked: true,
-            host: {
-                select: {
-                    username: true,
-                    id: true
-                }
-            },
-            _count: {
-                select: {
-                    raidParticipations: true
-                }
-            }
-        },
-        orderBy: [
-            { locked: "asc" },
-            { startsAt: "desc" }
-        ]
-    })
+async function getRaidData() {
+    const { fetch } = getRequestEvent()
 
-    const raidStats = await prisma.allTime.findMany({
-        where: {
-            userId
-        },
-        select: {
-            instanceId: true,
-            times_ran: true
-        },
-        orderBy: {
-            times_ran: "desc"
-        }
-    })
+    const response = await fetch("/api/raids?pages=xd")
+
+    const { myRaids, raidStats } = await response.json()
 
     return {
-        myRaids: allRaids,
+        myRaids,
         raidStats
     }
 }
@@ -55,6 +16,6 @@ async function getAllRaids(userId: string) {
 export async function load({ locals }) {
     return {
         user: locals.user,
-        raidData: locals.user && getAllRaids(locals.user.id)
+        raidData: locals.user && getRaidData()
     }
 }
